@@ -1,0 +1,16 @@
+Some notes related to the test that it should be done to improve the project
+
+- If more time allowed, some modules should be addedd
+    1. Logger
+    2. DB
+- Unit test should be added
+- Helmet, rate limit (throttler) should be added security purpose
+
+To start the application:
+1. configure the database info in docker-composer.yaml
+2. Run docker-compose up
+or
+1. configure the database info in .env
+2. run `npm install`
+3. run `npm run start`
+​

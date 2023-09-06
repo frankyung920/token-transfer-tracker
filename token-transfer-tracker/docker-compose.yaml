@@ -1,0 +1,36 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: frank
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: eth_track
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: frank
+      DATABASE_PASSWORD: 12345
+      DATABASE_NAME: eth_track
+      DAI_TOKEN_ADDRESS: 0x6b175474e89094c44da98b954eedeac495271d0f
+      DAI_TRANSFER_EVENT_SIGNATURE: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+      INFURA_API_KEY: 5d1d6f5c4088470eb88a06174fae31e1
+      BASIC_AUTH_ID: 6299de87-bc53-485d-928f-792c9a912dd4
+      BASIC_AUTH_SECRET: 24fb987b-6f2d-4a61-b42d-ea00ec97caf5
+      PORT: 3000 
+    ports:
+      - "3000:3000" 
+
+volumes:
+  postgres-data:
